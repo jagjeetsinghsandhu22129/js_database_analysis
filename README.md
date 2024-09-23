@@ -32,3 +32,5 @@ k3d cluster delete local-k8s
 ```
 
 Use this as a template and then add helm charts to the playbook.yml as required.
+
+see also https://github.com/open-telemetry/opentelemetry-collector-contrib

@@ -2,6 +2,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: depends-on-role
+  namespace: default
 rules:
 - apiGroups: ["batch", "apps", ""]
   resources: ["pods", "services", "jobs"]
@@ -13,6 +14,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: depends-on-role-binding
+  namespace: default
 subjects:
 - kind: ServiceAccount
   name: default

@@ -34,6 +34,10 @@
     ansible.builtin.command: k3d cluster create local-k8s
     args:
       creates: ~/.kube/config
+  - name: create RBAC
+    kubernetes.core.k8s:
+      state: present
+      src: ./kube/rbac.yaml
   - name: Deploy chart from local path
     kubernetes.core.helm:
       name: database-analysis

@@ -1,5 +1,5 @@
 services:
-  postgresql:
+  postgres:
     image: postgres
     restart: always
     environment:
@@ -12,7 +12,7 @@ services:
     command: ["--config=/etc/otel-collector.yaml"]
     volumes:
       - ./otel-collector.yaml:/etc/otel-collector.yaml
-    depends_on: [jaeger, postgresql]
+    depends_on: [jaeger, postgres]
 
 
   prometheus:

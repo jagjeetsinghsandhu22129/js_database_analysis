@@ -6,10 +6,15 @@ receivers:
       grpc:
         endpoint: "0.0.0.0:4317"
   postgresql:
-    endpoint: localhost:5432
+    endpoint: postgres:5432
     transport: tcp
     username: postgres
     password: example
+    databases:
+    - postgres
+    tls:
+        insecure: true
+
     connection_pool:
       max_idle_time: 10m
       max_lifetime: 0
@@ -37,6 +42,6 @@ service:
       exporters: [otlp]
 
     metrics:
-      receivers: [otlp]
+      receivers: [otlp, postgresql]
       processors: []
       exporters: [prometheus, logging]

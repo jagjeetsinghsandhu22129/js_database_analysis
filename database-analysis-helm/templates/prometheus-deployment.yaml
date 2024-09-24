@@ -22,6 +22,12 @@ spec:
       labels:
         io.kompose.service: prometheus
     spec:
+      initContainers:
+      - name: wait-for-otel-collector
+        image: opsfleet/depends-on
+        args:
+        - "-service=otel-collector"
+    
       containers:
         - image: prom/prometheus:v2.54.1
           name: prometheus

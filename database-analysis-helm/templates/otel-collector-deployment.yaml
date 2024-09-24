@@ -23,10 +23,14 @@ spec:
         io.kompose.service: otel-collector
     spec:
       initContainers:
-      - name: wait-for-services
+      - name: wait-for-postgres
         image: opsfleet/depends-on
         args:
         - "-service=postgres"
+      - name: wait-for-jaeger
+        image: opsfleet/depends-on
+        args:
+        - "-service=jaeger"
       containers:
         - args:
             - --config=/etc/otel-collector.yaml

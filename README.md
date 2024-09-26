@@ -1,36 +1,21 @@
-# k3d-helm
-run kubernetes cluster in codespace
+# database_analysis
+open telemetry collector for postgresql with db, prometheus and pgadmin
 
 TLDR;
 
 ```bash
 pip install -r requirements.txt
 ansible-playbook playbook.yml
-
 ```
 
-I did struggle with actually seeing the service outside of the dev container. If the service port is 80 and you want to access on 8080, you can run:
+If you change a .yaml file you can re-run the playbook that recreates the services.
+
+There is also a kubernetes version that I am struggling to actually observe metrics from:
 
 ```bash
-nohup kubectl port-forward svc/< what you named service > 8080:80  2>&1 &
+ansible-playbook playbook_k8.yml
 ```
 
-This repo makes a persistent volume from the storage folder. Consume it like this:
+Pgadmin is available on port 8888 via the pgadmin service login user-name@domain-name.com/example. The first time in pgadmin you will need to add the server postgres with username postgres/example Prometheus is available on port 9090 via the prometheus service.
 
-```yml
-# Additional volumes on the output Deployment definition.
-volumes: [ { "name": "my-volume", "persistentVolumeClaim": { "claimName": "my-pvc" }}]
 
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: [ { "mountPath": "/usr/share/nginx/html", "name": "my-volume" }]
-```
-
-To delete a cluster (and start over):
-
-```bash
-k3d cluster delete local-k8s
-```
-
-Use this as a template and then add helm charts to the playbook.yml as required.
-
-see also https://github.com/open-telemetry/opentelemetry-collector-contrib

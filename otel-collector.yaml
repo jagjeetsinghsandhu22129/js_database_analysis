@@ -20,7 +20,14 @@ receivers:
       max_lifetime: 0
       max_idle: 2
       max_open: 5
-
+  sqlquery:
+    driver: postgres
+    datasource: "host=postgres user=postgres password=example sslmode=disable database=postgres"
+    queries:
+      - sql: "SELECT COUNT(*) as count_test FROM pg_stat_activity WHERE query_start IS NOT NULL"
+        metrics:
+          - metric_name: query_activities
+            value_column: count_test
 processors:
 extensions:
   health_check: {}
@@ -42,6 +49,6 @@ service:
       exporters: [otlp]
 
     metrics:
-      receivers: [otlp, postgresql]
+      receivers: [otlp, postgresql, sqlquery]
       processors: []
       exporters: [prometheus, logging]

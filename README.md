@@ -18,4 +18,6 @@ ansible-playbook playbook_k8.yml
 
 Pgadmin is available on port 8888 via the pgadmin service login user-name@domain-name.com/example. The first time in pgadmin you will need to add the server postgres with username postgres/example Prometheus is available on port 9090 via the prometheus service.
 
+For the lab, add RED metrics based on pg_stat_database and hand in the otel-collector configuration.
+
 
